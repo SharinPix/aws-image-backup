@@ -1,11 +1,16 @@
 ---
-service: serverless-hello-world
+service: sharinpix-s3-backup
 provider:
   name: aws
   runtime: nodejs6.10
 functions:
   saveImage:
-    handler: lambda-function.handler
+    environment:
+      WEBHOOK_SECRET_KEY: "YOUR WEBHOOK SECRET KEY"
+      BUCKET_NAME: "THE BUCKET NAME"
+      SECRET_ACCESS_KEY: "AWS SECRET ACCESS KEY"
+      ACCESS_KEY_ID: "AWS ACCESS KEY ID"
+    handler: s3-backup.handler
     events:
     - http:
         path: save-image

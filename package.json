@@ -10,8 +10,7 @@
   "author": "SharinPix",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.95.0",
-    "dotenv": "^4.0.0"
+    "aws-sdk": "^2.95.0"
   },
   "devDependencies": {
     "serverless": "^1.22.0"
