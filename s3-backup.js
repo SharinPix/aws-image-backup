@@ -1,13 +1,12 @@
 const AWS = require('aws-sdk');
+const https = require('https');
+const querystring = require('querystring');
 const S3 = new AWS.S3({
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
     accessKeyId: process.env.ACCESS_KEY_ID
 });
 const WEBHOOK_SECRET_KEY = process.env.WEBHOOK_SECRET_KEY;
 const BUCKET_NAME = process.env.BUCKET_NAME;
-
-const https = require('https');
-const querystring = require('querystring');
 
 let generateOk = function(body) {
     return {
