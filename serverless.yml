@@ -1,0 +1,13 @@
+---
+service: serverless-hello-world
+provider:
+  name: aws
+  runtime: nodejs6.10
+functions:
+  saveImage:
+    handler: lambda-function.handler
+    events:
+    - http:
+        path: save-image
+        method: post
+        cors: true
