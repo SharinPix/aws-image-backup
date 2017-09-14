@@ -12,10 +12,8 @@ then install the dependencies:
 npm install
 ```
 
-Now you have to configure appropriate environment variables in the `serverless.yml` file.
-
 There are **four** environment variables to configure in the `serverless.yml` file. Namely:
-* `WEBHOOK_SECRET_KEY` - Get this secret key from your webhook on your SharinPix admin webhook page.
+* `WEBHOOK_SECRET_KEY` - Assign a strong and arbitrary secret to this variable.
 * `BUCKET_NAME` - The AWS S3 bucket name in which you want to backup your SharinPix images.
 * `SECRET_ACCESS_KEY` and `ACCESS_KEY_ID` - AWS secret and access key that will allow uploading images to the S3 bucket. (Ensure that it contains at-least write access to your AWS S3)
 
@@ -32,3 +30,4 @@ node_modules/.bin/serverless --stage=production
 ```
 
 Once completed, you will receive an endpoint URL. Copy and paste this endpoint in your webhook URL field in your SharinPix admin webhook page.
+**Remember** to assign the `WEBHOOK_SECRET_KEY` that you created to the webhook `Secret` field on the SharinPix admin webhook page.
