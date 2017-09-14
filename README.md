@@ -21,7 +21,7 @@ There are **four** environment variables to configure. Namely:
 
 Since Serverless uses AWS, you must have two environment variables configured. Please follow the Serverless docs below before jumping to the next step.
 
-[https://serverless.com/framework/docs/providers/aws/guide/credentials/]()
+[https://serverless.com/framework/docs/providers/aws/guide/credentials/](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
 
 Once completed, you can now deploy your Serverless using the command below.
 
