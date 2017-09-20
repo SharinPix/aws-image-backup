@@ -1,11 +1,12 @@
-require('dotenv').config();
-const https = require('https');
 const AWS = require('aws-sdk');
+const https = require('https');
 const querystring = require('querystring');
 const S3 = new AWS.S3({
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
     accessKeyId: process.env.ACCESS_KEY_ID
 });
+const WEBHOOK_SECRET_KEY = process.env.WEBHOOK_SECRET_KEY;
+const BUCKET_NAME = process.env.BUCKET_NAME;
 
 let generateOk = function(body) {
     return {
@@ -21,7 +22,7 @@ exports.handler = (event, context, callback) => {
     event['payload'] = event.body;
     event['eventName'] = event.headers['X-Sharinpix-Event'];
     event['secret'] = event.headers['X-Sharinpix-Secret'];
-    if (event.eventName !== 'new_image' || event.secret !== process.env.WEBHOOK_SECRET_KEY) {
+    if (event.eventName !== 'new_image' || event.secret !== WEBHOOK_SECRET_KEY) {
         return callback(null, generateOk('{"success": false, "message": "Unknown event type or wrong secret key.", "received": "' + event.eventName + '"}'));
     }
     let actualPayload = JSON.parse(querystring.unescape(querystring.decode(event.payload).p));
@@ -38,7 +39,7 @@ exports.handler = (event, context, callback) => {
             res.on('end', function() {
                 var buffer = Buffer.concat(rawData);
                 S3.upload({
-                    Bucket: process.env.BUCKET_NAME,
+                    Bucket: BUCKET_NAME,
                     Key: actualPayload.album.public_id + '/' + actualPayload.infos.original_filename + '_' + actualPayload.public_id + '.' + actualPayload.infos.format,
                     Body: buffer
                 }, function(err) {
